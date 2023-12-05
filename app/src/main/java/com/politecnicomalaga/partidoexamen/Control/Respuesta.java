@@ -1,37 +1,18 @@
 package com.politecnicomalaga.partidoexamen.Control;
-
-import com.politecnicomalaga.NasdaqOilPrices.Model.Partido;
-
+import com.politecnicomalaga.partidoexamen.Model.Partido;
 import java.util.LinkedList;
 import java.util.List;
-
-/**
- * Clase respuesta. Encapsulará los datos que nos devuelve la API REST
- * opendata de Nasdaq.
- *
- * El controlador le dará el texto a "analizar" en JSON y proporcionará
- * una serialización de los datos "amigable" para la vista. Es en
- * realidad un procesador de textos (parser)
- */
-
 public class Respuesta {
-    //ESTADO
     protected String datos;
-
-
-    //COMPORTAMIENTO
     public Respuesta(String entrada) {
         datos = entrada;
     }
     public List<Partido> getData() {
-
         LinkedList<Partido> dataList = new LinkedList<>();
-
         String datosCortados = recortarAntes(datos,"1 Real Sociedad - Mallorca 1",2);
         String datosCortados2 = recortarDespues(datosCortados, "El ",1);
         String[] lines = datosCortados2.split("\n");
         String Temp = null;
-
         for (String line : lines
         ) {
             String[] parts = line.trim().split("\\s+");
@@ -52,8 +33,6 @@ public class Respuesta {
                 if (parts.length == 9)
                     dataList.add(new Partido(parts[3], parts[5], parts[6] + parts[7] + parts[8]));
             }
-
-
         return dataList;
     }
     public static String recortarAntes(String cadena, String palabra, int ocurrencia) {
