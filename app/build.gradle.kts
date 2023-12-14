@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.politecnicomalaga.partidoexamen"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.politecnicomalaga.partidoexamen"
